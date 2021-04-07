@@ -1,0 +1,35 @@
+{
+	"name": "gudie-designs",
+	"version": "1.0.0",
+	"description": "A potential e-comerce store",
+	"main": "server.js",
+	"scripts": {
+		"client-install": "npm install --client",
+		"start": "cross-env NODE_ENV=production node server",
+		"server": "cross-env NODE_ENV=development nodemon server.js",
+		"client": "npm start --prefix client",
+		"dev": "concurrently \"npm run server\" \"npm run client\""
+	},
+	"author": "John Peter",
+	"license": "MIT",
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"concurrently": "^6.0.0",
+		"connect-mongo": "^4.4.0",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-session": "^1.17.1",
+		"google-auth-library": "^7.0.2",
+		"jsonwebtoken": "^8.5.1",
+		"method-override": "^3.0.0",
+		"moment": "^2.29.1",
+		"mongoose": "^5.12.1",
+		"morgan": "^1.10.0",
+		"passport": "^0.4.1",
+		"passport-google-oauth20": "^2.0.0"
+	},
+	"devDependencies": {
+		"cross-env": "^7.0.3",
+		"nodemon": "^2.0.7"
+	}
+}
