@@ -1,13 +1,13 @@
 .loginBackground {
-	filter: blur(8px);
-	-webkit-filter: blur(8px);
+	/* filter: blur(8px);
+	-webkit-filter: blur(5px); */
 	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
 .loginContent {
-	background-color: rgba(0, 0, 0, 0.815);
+	background-color: rgba(0, 0, 0, 0.705);
 	color: white;
 	font-weight: bold;
 	position: absolute;
