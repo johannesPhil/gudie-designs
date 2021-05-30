@@ -1,8 +1,8 @@
 import React from "react";
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Login from "../components/Login";
 import Register from "../components/Register";
-import Dashboard from '../components/Dashboard'
+import Dashboard from "../components/Dashboard";
 
 const Client = () => {
 	return (

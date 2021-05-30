@@ -1,17 +1,18 @@
 const jwt = require("jsonwebtoken");
 
 const jwtAuth = (req, res, next) => {
-	const token = req.headers("x-auth-token");
+	const token = req.header("x-auth-token");
 
-	if (!token)
-		return res.status(401).json({ message: "Your request is UNAUTHORIZED" });
+	if (!token) {
+		return res.status(400).json({ msg: "Your request is UNAUTHORIZED" });
+	}
 
 	try {
 		const decipher = jwt.verify(token, process.env.JWT_SECRET);
 
-		req.user = decipher;
+		req.client = decipher;
 	} catch (error) {
-		return res.status(400).json({ message: "Invalid Token Supplied" });
+		return res.status(403).json({ msg: "Invalid Token Supplied" });
 	}
 
 	next();
