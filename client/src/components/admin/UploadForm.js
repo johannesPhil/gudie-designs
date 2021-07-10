@@ -6,24 +6,42 @@ import { uploadProduct } from "../../actions/productActions";
 const UploadForm = (e) => {
 	const [blobs, setBlobs] = useState(null);
 	const [imageFiles, setImageFiles] = useState(null);
-	// const [preview, setPreview] = useState("");
-	//Form Content
+
 	const [caption, setCaption] = useState("");
 	const [price, setPrice] = useState("");
 	const [color, setColor] = useState("");
-	const [quantity, setQuantity] = useState("");
+	const [size, setSize] = useState("");
 	const [description, setDescription] = useState("");
 
-	// //Button state
-	// const [disabled, setDisabled] = useState(false);
-	// // Form error
-	// const [formError, setFormError] = useState("");
+	// Form error
+	const [formError, setFormError] = useState("");
+
+	const captionChange = (e) => {
+		setCaption(e.target.value);
+	};
+
+	const priceChange = (e) => {
+		setPrice(e.target.value);
+	};
+
+	const colorChange = (e) => {
+		setColor(e.target.value);
+	};
+
+	const sizeChange = (e) => {
+		setSize(e.target.value);
+	};
+
+	const descriptionChange = (e) => {
+		setDescription(e.target.value);
+	};
 
 	const imageObject = [];
 	const imageUrl = [];
 	const imageSelection = (e) => {
 		imageObject.push(e.target.files);
 		setImageFiles(imageObject);
+		console.log(imageObject);
 
 		Object.entries(imageObject[0]).forEach((img) => {
 			imageUrl.push(URL.createObjectURL(img[1]));
@@ -33,22 +51,20 @@ const UploadForm = (e) => {
 
 	const upload = (e) => {
 		e.preventDefault();
-		console.log(imageFiles);
-		if (imageFiles === null) {
-			console.log("No image");
+
+		if (!caption || !price || !color || !size || !description) {
+			setFormError("Please fill all fields");
+			console.log(formError);
 			return;
 		}
 
-		const formData = new FormData();
-		Object.entries(imageFiles[0]).forEach((image, index) => {
-			formData.append(`photos${index}`, image);
-		});
+		if (!imageFiles) {
+			setFormError("Product image missing");
+			console.log(formError);
+			return;
+		}
 
-		formData.append(`caption`, caption);
-		formData.append(`price`, price);
-		formData.append(`color`, color);
-		formData.append(`quantity`, quantity);
-		formData.append(`description`, description);
+		const formData = new FormData(e.target);
 
 		uploadProduct(formData);
 	};
@@ -58,7 +74,12 @@ const UploadForm = (e) => {
 	return (
 		<div className=" w-11/12 h-5/6 m-auto">
 			<div className=" bg-white rounded-xl shadow-md p-10 my-2">
-				<form action="" className="h-full bg-white" onSubmit={upload}>
+				<form
+					action=""
+					className="h-full bg-white"
+					onSubmit={upload}
+					encType="multipart/form-data"
+				>
 					<div className=" grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-x-20">
 						<div className="flex flex-col">
 							<div className="grid grid-cols-1 lg:grid-cols-2  gap-6">
@@ -70,8 +91,7 @@ const UploadForm = (e) => {
 										type="text"
 										name="caption"
 										id="caption"
-										value={caption}
-										onChange={(e) => setCaption(e.target.value)}
+										onChange={captionChange}
 										className="w-full p-2 mr-2 bg-gray-100 text-purple-900 hover:bg-purple-100 focus:bg-purple-200 focus:outline-none rounded-md"
 									/>
 								</div>
@@ -80,11 +100,10 @@ const UploadForm = (e) => {
 										Price
 									</label>
 									<input
-										type="text"
+										type="number"
 										name="price"
 										id="price"
-										value={price}
-										onChange={(e) => setPrice(e.target.value)}
+										onChange={priceChange}
 										className="w-full p-2 bg-gray-100 hover:bg-purple-100 focus:bg-purple-100 focus:outline-none rounded-md"
 									/>
 								</div>
@@ -96,21 +115,19 @@ const UploadForm = (e) => {
 										type="text"
 										name="color"
 										id="color"
-										value={color}
-										onChange={(e) => setColor(e.target.value)}
+										onChange={colorChange}
 										className="w-full p-2 bg-gray-100 hover:bg-purple-100 focus:bg-purple-100 focus:outline-none rounded-md"
 									/>
 								</div>
 								<div className="">
 									<label htmlFor="stock" className="label">
-										Stock(Quantity)
+										Size
 									</label>
 									<input
 										type="number"
-										name="stock"
-										id="quantity"
-										value={quantity}
-										onChange={(e) => setQuantity(e.target.value)}
+										name="size"
+										id="size"
+										onChange={sizeChange}
 										min="0"
 										className="w-full p-2 bg-gray-100 hover:bg-purple-100 focus:bg-purple-100 focus:outline-none rounded-md"
 									/>
@@ -123,14 +140,13 @@ const UploadForm = (e) => {
 								<textarea
 									name="description"
 									id="desc"
-									value={description}
-									onChange={(e) => setDescription(e.target.value)}
+									onChange={descriptionChange}
 									className="w-full p-2 h-20 bg-gray-100 hover:bg-purple-100 focus:bg-purple-100 focus:outline-none"
 								></textarea>
 							</div>
 						</div>
 
-						<div className="w-full h-5/6 m-auto p-2 grid grid-cols-2  sm:grid-cols-3 duration-500 md:grid-cols-2 lg:grid-cols-4 justify-items-center lg:justify-items-end gap-4 border-2 border-purple-200 border-dotted rounded-md">
+						<div className="w-full h-5/6 md:h-auto m-auto p-2 grid grid-cols-2  sm:grid-cols-3 duration-500 md:grid-cols-2 lg:grid-cols-4 justify-items-center lg:justify-items-end gap-4 border-2 border-purple-200 border-dotted rounded-md">
 							{blobs
 								? blobs.map((blob, index) => (
 										<div className=" w-auto h-28" key={index}>
@@ -144,7 +160,10 @@ const UploadForm = (e) => {
 								: ""}
 						</div>
 					</div>
-					<div className="flex flex-col sm:flex-row justify-between mt-6">
+					<div className="flex flex-col-reverse sm:flex-row justify-between mt-6">
+						<button className="bg-purple-500 px-4 py-1 text-white rounded focus:outline-white">
+							Submit
+						</button>
 						<div className="images w-auto h-auto mb-4 sm:mb-0 bg-purple-500 rounded text-white">
 							<label className=" block px-4 py-1 cursor-pointer text-center">
 								<input
@@ -158,9 +177,6 @@ const UploadForm = (e) => {
 								Select Images
 							</label>
 						</div>
-						<button className="bg-purple-500 px-4 py-1 text-white rounded focus:outline-white">
-							Submit
-						</button>
 					</div>
 				</form>
 			</div>

@@ -1,32 +1,28 @@
-import { loadUser } from "./../actions/localAuthActions";
+// import { loadUser } from "./../actions/localAuthActions";
 import { Redirect } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
 import UploadForm from "./admin/UploadForm";
 
 import logo from "../assets/logo.svg";
 import "../styles/applied.css";
+import "../styles/admin.css";
 
 const Dashboard = () => {
-	const dispatch = useDispatch();
-	const { isAuthenticated } = useSelector((state) => state.localAuth);
+	// const dispatch = useDispatch();
+	// const { isAuthenticated } = useSelector((state) => state.localAuth);
 	const [content, setContent] = useState(1);
 
 	const toggleContent = (key) => {
 		setContent(key);
 	};
 
-	useEffect(() => {
-		dispatch(loadUser());
-	}, [dispatch]);
+	useEffect(() => {}, []);
 	if (true) {
 		return (
 			<div className="dashboard-wrapper bg-gray-100 w-screen h-screen m-auto p-8">
-				<div
-					className="w-full h-full p-3 bg-transparent bg-opacity-100 bg-white bg-clip-padding rounded-md shadow-xl"
-					style={{ backdropFilter: "blur(10px)" }}
-				>
+				<div className="w-full h-full p-3 bg-transparent bg-opacity-100 bg-white bg-clip-padding rounded-md shadow-xl">
 					<div className="top-banner w-full h-auto py-5 rounded-t-3xl flex flex-row justify-between items-center">
 						<img src={logo} alt="" className="w-10 h-10 block" />
 						<p className="block text-white">Overview</p>

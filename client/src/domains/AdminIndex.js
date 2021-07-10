@@ -1,9 +1,7 @@
-// import { loadUser } from "./../actions/localAuthActions";
-// import { useDispatch } from "react-redux";
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Dashboard from "../components/Dashboard";
-import AdminLogin from "../components/AdminLogin";
+import AdminLogin from "../components/admin/AdminLogin";
 import Admin from "../pages/Admin";
 
 const AdminIndex = () => {

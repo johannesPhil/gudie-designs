@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === "development") {
 // Routes
 app.use("/api/register", require("./route/api/register"));
 app.use("/api/login", require("./route/api/login"));
-app.use("/api/produts", require("./route/api/products"));
+app.use("/api/products", require("./route/api/products"));
 
 //Serve Static assets in production
 if (process.env.NODE_ENV === "production") {

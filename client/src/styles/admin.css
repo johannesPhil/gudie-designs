@@ -18,6 +18,31 @@
 	text-align: center;
 }
 
+.content-wrapper {
+	scrollbar-width: thin;
+	scrollbar-color: #ddd6fe #5a21b665;
+}
+
+.content-wrapper::scrollbar {
+	width: 10px;
+}
+
+.content-wrapper::-webkit-scrollbar {
+	width: 10px;
+}
+
+.content-wrapper::-webkit-scrollbar-track {
+	border-radius: 15px;
+	-moz-box-shadow: inset 0 0 2px #ddd6fe;
+	-webkit-box-shadow: inset 0 0 2px #ddd6fe;
+	box-shadow: inset 0.1px 0 5px #ddd6fe;
+}
+
+.content-wrapper::-webkit-scrollbar-thumb {
+	border-radius: 15px;
+	box-shadow: inset 10px 0 5px #5a21b6c2;
+}
+
 /* .tab-list {
 	background: rgba(170, 79, 166, 0.705);
 	margin: 1rem 0;

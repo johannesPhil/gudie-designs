@@ -1,11 +1,11 @@
 import { Redirect } from "react-router-dom";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import "../styles/admin.css";
-import shoestep from "../assets/shoestep.jpg";
+import "../../styles/admin.css";
+import shoestep from "../../assets/shoestep.jpg";
 
 import { useDispatch } from "react-redux";
-import { loginAdmin } from "../actions/localAuthActions";
+import { loginAdmin } from "../../actions/localAuthActions";
 
 const AdminLogin = () => {
 	const dispatch = useDispatch();
